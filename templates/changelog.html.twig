@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Changelog{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+    <span>Environnement courant: {{ app.environment }}</span><br>
+    <span>IP local {{ app.request.server.get("HTTP_X_FORWARDED_FOR") ?? app.request.server.get("SERVER_NAME") }}</span>
+
+    {% apply markdown_to_html %}
+        {{ changelog}}
+    {% endapply %}
+    </body>
+</html>

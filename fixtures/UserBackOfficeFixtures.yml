@@ -1,0 +1,9 @@
+App\Entity\UserBackOffice:
+    userbo_superadmin:
+        email: 'superadmin@email.com'
+        roles: '[ROLE_BO_SUPERADMIN]'
+        identity: 'superadmin@email.com'
+        username: 'superadmin'
+        firstName: 'super'
+        lastName: 'admin'
+        password: 'somepassword'

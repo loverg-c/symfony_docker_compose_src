@@ -1,0 +1,19 @@
+{% extends "backoffice/layout_partials/section_template.html.twig" %}
+
+{#extends variable#}
+{% set section_name = 'Aides' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('backoffice/helps/form') }}
+    {{ encore_entry_link_tags('backoffice/common/wysiwyg') }}
+{% endblock %}
+
+{% block section_content %}
+    {% include 'backoffice/help/section_content/form.html.twig' %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('backoffice/helps/form') }}
+    {{ encore_entry_script_tags('backoffice/common/wysiwyg') }}
+{% endblock %}

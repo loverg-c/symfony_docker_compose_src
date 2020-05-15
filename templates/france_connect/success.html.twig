@@ -1,0 +1,9 @@
+{% if token is not empty %}
+    <script>
+        function getInfos() {
+            return {
+                token: "{{ token }}"
+            }
+        }
+    </script>
+{% endif %}

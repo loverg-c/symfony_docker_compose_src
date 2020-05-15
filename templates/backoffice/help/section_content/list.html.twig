@@ -1,0 +1,50 @@
+{% extends "backoffice/layout_partials/section_content/table_template.html.twig" %}
+
+{% set table_name = 'Liste des aides' %}
+{% set path_add_action = 'backoffice_helps_add_help' %}
+{% set section_add_action = 'Ajouter une aide' %}
+{% set delete_button_id = 'modal-delete-help-button' %}
+
+{% block thead %}
+    <th class="col-xs-2" data-filter-type="text">Titre</th>
+    <th class="col-xs-3" data-filter-type="select">Sujet</th>
+    <th class="col-xs-3" data-filter-type="select">Page</th>
+    <th class="col-xs-2" data-filter-type="text">Publiée le</th>
+    <th class="col-xs-1 text-center">Status</th>
+    <th class="col-xs-1 text-center">Actions</th>
+{% endblock %}
+
+{% block tbody %}
+    {% for help in helps %}
+        <tr data-modal-text="{{ help.title }}">
+            <td>{{ help.title }}</td>
+            <td>{{ help.subject }}</td>
+            <td>{{ help.page }}</td>
+            <td>{{ help.createdat|date('Y-m-d H:m') }}</td>
+            <td class="text-center">
+                <input type="checkbox" class="" data-toggle="toggle"
+                       data-size="mini"
+                       data-on="Public" data-onstyle="success"
+                       data-off="Brouillon" data-offstyle="warning" readonly
+                       onchange="activeHelpAction(this, {{ help.id }})"
+                    {% if help.isActive == '1' %} checked{% endif %}
+                >
+            </td>
+            <td class="text-center">
+                <a href="{{ path('backoffice_helps_edit', {'id': help.id  }) }}">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+                <i class="fas fa-trash-alt modal-call"
+                   data-toggle="modal"
+                   data-target="#modal-delete"
+                   data-modal-type='delete'
+                   data-modal-entity-id='{{ help.id }} '
+                   data-button-id='{{ delete_button_id }}'>
+                </i>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('backoffice/helps/index') }}
+{% endblock %}

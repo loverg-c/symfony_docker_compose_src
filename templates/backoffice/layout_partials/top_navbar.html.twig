@@ -1,0 +1,30 @@
+<!-- Logo -->
+<a href="{{ path('backoffice_bo_index') }}" class="logo">
+    <!-- mini logo for sidebar mini 50x50 pixels -->
+    <span class="logo-mini"><img src="{{ asset('build/img/favicon.ico') }}" />SFDoc</span>
+    <!-- logo for regular state and mobile devices -->
+    <span class="logo-lg"><img src="{{ asset('build/img/favicon.ico') }}" /> <b>Symfony Docker</b> BO</span>
+</a>
+
+<!-- Header Navbar -->
+<nav class="navbar navbar-static-top" role="navigation">
+    <!-- Sidebar toggle button-->
+    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+    </a>
+    <!-- Navbar Right Menu -->
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            <li class="user user-menu">
+                <a href="{{ path('backoffice_users_index') }}" style="" aria-expanded="false">
+                    <img src="{{ asset('build/img/default_bo.png') }}"
+                         class="user-image"
+                         alt="User Image">
+                    <span class="hidden-xs">{{ app.user.firstName|default('')|capitalize ~ ' ' ~ app.user.lastName|default('')|capitalize }}</span>
+                </a>
+            </li>
+
+            <li><a href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i></a></li>
+        </ul>
+    </div>
+</nav>

@@ -1,0 +1,5 @@
+pdf:
+    service_url: '%env(GOTEMBERG_URL)%'
+
+parameters:
+    env(GOTEMBERG_URL): 'http://gotemberg:3000'

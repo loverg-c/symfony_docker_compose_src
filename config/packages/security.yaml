@@ -1,0 +1,97 @@
+security:
+    encoders:
+        App\Entity\UserBackOffice:
+            algorithm: bcrypt
+            cost: 12
+        App\Entity\AppUser:
+            algorithm: bcrypt
+            cost: 12
+
+    providers:
+        user_api:
+            entity: { class: App\Entity\AppUser, property: identity }
+        user_backoffice:
+            entity: { class: App\Entity\UserBackOffice, property: email }
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        api_doc:
+            pattern: ^/api/doc
+            security: false
+
+        login:
+            pattern:  ^/api/login
+            provider: user_api
+            stateless: true
+            anonymous: true
+            json_login:
+                check_path: /api/login
+                username_path: identity
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        register:
+            pattern:  ^/api/register
+            stateless: true
+            anonymous: ~
+
+        lost_password:
+            pattern:  ^/api/lost-password
+            stateless: true
+            anonymous: ~
+
+
+        update_password:
+            pattern:  ^/api/update-password
+            stateless: true
+            anonymous: ~
+
+        api:
+            pattern: ^/api
+            stateless: true
+            provider: user_api
+            guard:
+                authenticator:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+        sips:
+            pattern: ^/cession_request/taxes-paiement/form
+            stateless: true
+            provider: user_api
+            guard:
+                authenticator:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
+        admin:
+            pattern:  ^/admin
+            provider: user_backoffice
+            anonymous: ~
+            logout:
+                path:  app_logout
+                target: backoffice_app_login
+            guard:
+                authenticators:
+                    - App\Security\UserBackOfficeAuthenticator
+
+    access_control:
+        - { path: ^/success, ips: [127.0.0.1/8] }
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/cession_request/taxes-paiement/init, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/token, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY, ips: [127.0.0.1/8, 172.30.0.0/24] }
+        - { path: ^/api/doc, roles: ROLE_NO_ACCESS }
+        - { path: ^/api/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/update-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/lost-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+
+    role_hierarchy:
+        ROLE_APP_USER: [ROLE_APP_GUEST]
+        ROLE_BO_ADMIN: [ ROLE_BO_USER ]
+        ROLE_BO_SUPERADMIN: [ ROLE_BO_ADMIN ]

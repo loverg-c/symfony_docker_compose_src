@@ -1,0 +1,47 @@
+{% extends "backoffice/layout_partials/section_template.html.twig" %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('backoffice/common/table') }}
+    {{ encore_entry_link_tags('backoffice/helps/index') }}
+{% endblock %}
+
+{#extends variable#}
+{% set section_name = 'Aides' %}
+
+{#local variable#}
+{% set modal_delete_button_id = 'modal-delete-help-button' %}
+
+
+{% block section_content %}
+    <div id="help-list">
+        {% include 'backoffice/help/section_content/list.html.twig' with {
+            delete_button_id: modal_delete_button_id
+        } %}
+    </div>
+    <div id="modal-help-delete">
+        {% embed 'backoffice/layout_partials/modal.html.twig'  with {
+            'modal_type': 'delete',
+            'modal_title': 'Supprimer une aide'
+        } %}
+            {% block modal_body %}
+                Etes-vous sur de vouloir supprimer: <span id="modal-delete-dynamic-text">X</span> ?
+            {% endblock %}
+
+            {% block modal_buttons %}
+                <button type="button"
+                        class="btn btn-danger"
+                        id="{{ modal_delete_button_id }}"
+                        data-id-to-delete=''
+                        onclick="deleteHelpAction(this)">
+                    <span id="{{ modal_delete_button_id }}-text">Oui</span>
+                </button>
+            {% endblock %}
+        {% endembed %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('backoffice/common/table') }}
+    {{ encore_entry_script_tags('backoffice/common/modal') }}
+    {{ encore_entry_script_tags('backoffice/helps/index') }}
+{% endblock %}

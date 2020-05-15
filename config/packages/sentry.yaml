@@ -1,0 +1,7 @@
+sentry:
+    dsn: '%env(SENTRY_DSN)%'
+    options:
+        environment: '%kernel.environment%'
+        release: '%env(VERSION)%' #your app version
+parameters:
+    env(VERSION): 'v1'

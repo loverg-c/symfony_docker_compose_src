@@ -1,0 +1,10 @@
+{% extends "backoffice/general_template.html.twig" %}
+
+{% block wrapper %}
+    <section class="content-header">
+        <h1 class="page-header">{{ section_name|default('') }}</h1>
+    </section>
+    <section class="content container-fluid">
+        {% block section_content %}{% endblock %}
+    </section>
+{% endblock %}

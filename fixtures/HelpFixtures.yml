@@ -1,0 +1,13 @@
+App\Entity\Help:
+  Help_1:
+    page: 'Test1'
+    subject: "btn1"
+    isActive: true
+    title: 'title 1'
+    content: '<identity("<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>")>'
+  Help_2:
+    page: 'Test2'
+    subject: 'btn2'
+    isActive: true
+    title: 'title 1'
+    content: '<identity("<p></p>")>'

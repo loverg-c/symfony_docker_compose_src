@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    {{ encore_entry_link_tags('backoffice/common/app') }}
+    {{ encore_entry_link_tags('backoffice/common/login_page') }}
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+    <div class="login-logo">
+        <span class="logo-lg"><img src="{{ asset('build/img/favicon.ico') }}" height="150"/> <b>Symfony Docker</b> BO</span>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Veuillez vous connecter</p>
+
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+            <div class="form-group has-feedback">
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail"
+                       class="form-control"
+                       placeholder="Email" required autofocus>
+                <span class="fas fa-at form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" name="password" id="inputPassword"
+                       class="form-control"
+                       placeholder="Password"
+                       required>
+                <span class="fas fa-key form-control-feedback"></span>
+            </div>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+            <div class="row">
+                <div class="col-xs-12 text-right">
+                    <div class="checkbox icheck">
+                        <label>
+                            <div class="icheckbox_square-blue"
+                                 aria-checked="false"
+                                 aria-disabled="false"
+                                 style="position: relative;">
+                                <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-12 text-center">
+                    <button type="submit" class="btn btn-primary bg-purple btn-block btn-flat">Se connecter
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{{ encore_entry_script_tags('backoffice/common/app') }}
+{{ encore_entry_script_tags('backoffice/common/login_page') }}
+</body>
+</html>

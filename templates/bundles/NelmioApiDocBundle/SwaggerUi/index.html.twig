@@ -1,0 +1,12 @@
+{% extends '@!NelmioApiDoc/SwaggerUi/index.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('custom-swagger-styles') }}
+{% endblock stylesheets %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('custom-swagger-styles') }}
+{% endblock javascripts %}

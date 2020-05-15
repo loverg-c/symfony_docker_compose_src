@@ -1,0 +1,23 @@
+.fa-trash.modal-call {
+    cursor: pointer;
+}
+
+@keyframes loading {
+    50% {
+        opacity: 0.3;
+    }
+}
+
+.table.dataTable .loading {
+    pointer-events: none;
+    background-color: #feffcd;
+    animation: loading 1.5s infinite;
+}
+
+.main-header .sidebar-toggle::before {
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: 900;
+}
+.loading td {
+    position: relative;
+}

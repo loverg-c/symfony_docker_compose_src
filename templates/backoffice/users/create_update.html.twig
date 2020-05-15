@@ -1,0 +1,8 @@
+{% extends "backoffice/layout_partials/section_template.html.twig" %}
+
+{#extends variable#}
+{% set section_name = 'Utilisateurs' %}
+
+{% block section_content %}
+    {% include 'backoffice/users/section_content/form.html.twig' %}
+{% endblock %}

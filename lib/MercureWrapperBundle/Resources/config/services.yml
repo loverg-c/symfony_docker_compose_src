@@ -1,0 +1,4 @@
+services:
+  Lib\MercureWrapperBundle\MercureWrapper\MercureWrapper:
+    class: Lib\MercureWrapperBundle\MercureWrapper\MercureWrapper
+    autowire: true

@@ -1,0 +1,60 @@
+{% extends "backoffice/layout_partials/section_template.html.twig" %}
+
+{#extends variable#}
+{% set section_name = 'Bienvenue' %}
+
+{% block section_content %}
+
+    <div id="dashboard-list">
+        {% block content %}
+            <div class="row">
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>{{ userbo_number|default(0) }}</h3>
+
+                            <p>Utilisateurs BackOffice</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-user-o"></i>
+                        </div>
+                        {% if is_granted("ROLE_BO_SUPERADMIN") %}
+                            <a href="{{ path('backoffice_users_index') }}" class="small-box-footer">
+                                Plus d'information <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>{{ help_number|default(0) }}</h3>
+
+                            <p>Aides actives</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-question-circle-o"></i>
+                        </div>
+                        {% if is_granted("ROLE_BO_ADMIN") %}
+                            <a href="{{ path('backoffice_helps_index') }}" class="small-box-footer">
+                                Plus d'information <i class="fas fa-arrow-circle-right"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+            {% if reset_fixture == true and is_granted("ROLE_BO_SUPERADMIN") %}
+                <div class="row">
+                    <a href="{{ path('backoffice_bo_reset_fixtures') }}"
+                       class="btn btn-danger col-xs-12 col-md-offset-5 col-md-2">
+                        <i class="fas fa-5x fa-exclamation-triangle"></i> Remise à zéro de la BDD
+                    </a>
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock %}

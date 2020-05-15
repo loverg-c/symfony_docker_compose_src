@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    {% for css in csss %}
+        <link rel="stylesheet" href="{{ css }}">
+    {% endfor %}
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('build/img/favicon.ico') }}"/>
+</head>
+<body>
+{% block body %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,15 @@
+controllers:
+    resource: '../src/Controller/Home/'
+    type: annotation
+
+api:
+    resource: '../src/Controller/API/'
+    type: annotation
+    prefix: /api
+    name_prefix: api_
+
+bo:
+    resource: '../src/Controller/BackOffice/'
+    type: annotation
+    prefix: /admin
+    name_prefix: backoffice_

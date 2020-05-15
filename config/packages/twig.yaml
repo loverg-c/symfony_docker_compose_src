@@ -1,0 +1,22 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+
+services:
+
+    Twig\Extra\Markdown\MarkdownExtension:
+        class: Twig\Extra\Markdown\MarkdownExtension
+        public: true
+        tags:
+            - { name: twig.extension }
+
+    Twig\Extra\Markdown\DefaultMarkdown:
+        class: Twig\Extra\Markdown\DefaultMarkdown
+
+    Twig\Extra\Markdown\MarkdownRuntime:
+        class: Twig\Extra\Markdown\MarkdownRuntime
+        tags:
+            - { name: twig.runtime }
+        arguments:
+            $converter: '@Twig\Extra\Markdown\DefaultMarkdown'

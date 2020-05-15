@@ -1,0 +1,4 @@
+parameters:
+services:
+    _defaults:
+        public: true

@@ -1,0 +1,6 @@
+services:
+  Lib\PDFBundle\PDFWrapper\PDFWrapper:
+    class: Lib\PDFBundle\PDFWrapper\PDFWrapper
+    arguments:
+      $serviceUrl: '%pdf.service_url%'
+    autowire: true

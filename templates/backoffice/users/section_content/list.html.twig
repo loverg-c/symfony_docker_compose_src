@@ -1,0 +1,43 @@
+{% extends "backoffice/layout_partials/section_content/table_template.html.twig" %}
+
+{% set table_name = 'Liste des Utilisateurs' %}
+{% set path_add_action = 'backoffice_users_create' %}
+{% set section_add_action = 'Ajouter un utilisateur'%}
+
+{% block thead %}
+    <tr>
+        <th class="col-xs-2" data-filter-type="text">nom</th>
+        <th class="col-xs-2" data-filter-type="text">prenom</th>
+        <th class="col-xs-3" data-filter-type="text">email</th>
+        <th class="col-xs-4" data-filter-type="select">roles</th>
+        <th class="col-xs-1 text-center">Actions</th>
+    </tr>
+{% endblock %}
+
+{% block tbody %}
+    {% for user in users %}
+        <tr data-modal-text="{{ user.firstName }} {{ user.lastName }} ">
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td> {% for role in user.roles %}
+                    {{roletranslate[role]}}
+                {% endfor %}
+            </td>
+
+            <td>
+                {% if is_granted("ROLE_BO_SUPERADMIN") %}
+                    <a href="{{ path('backoffice_users_edit', {'id': user.id  }) }}">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                    <i class="fas fa-trash modal-call"
+                       data-toggle="modal"
+                       data-target="#modal-delete"
+                       data-modal-type='delete'
+                       data-modal-entity-id='{{ user.id }} '
+                       data-button-id='{{ delete_button_id }}'></i>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
